@@ -1,0 +1,15 @@
+[Unit] 
+        Description=Task Dispatcher Service 
+        After=network.target 
+[Service] 
+        User=user 
+        Group=user 
+        ExecStart=/usr/bin/python3 /home/user/task_dispatcher/dispatcher.py
+        Restart=on-failure 
+        RestartSec=5s 
+        Environment=PATH=/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin 
+        StandardOutput=append:/var/log/task_dispatcher.log 
+        StandardError=inherit
+        Environment=RECEIVER="192.168.140.163"
+[Install] 
+        WantedBy=multi-user.target
